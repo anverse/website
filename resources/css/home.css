@@ -1,0 +1,147 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  height: 75px;
+  padding: 25px 10px;
+  transform: translateZ(0);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 8px -1px #0000001a;
+}
+
+.logo img {
+  filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+}
+
+.logo::before,
+.logo::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+}
+
+.logo::before {
+  animation: 6s rotate linear infinite;
+  width: 200%;
+  height: 200%;
+  background: var(--tile-border);
+}
+
+.logo::after {
+  inset: 0;
+  padding: 1px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(
+    to bottom right,
+    rgba(var(--tile-start-rgb), 1),
+    rgba(var(--tile-end-rgb), 1)
+  );
+  background-clip: content-box;
+}
+
+h1 {
+  font-size: 56px;
+  margin: 24px 0 8px;
+}
+
+p {
+  font-size: 22px;
+  color: rgb(180, 188, 208);
+  margin: 0;
+}
+
+.globe {
+  --page-max-width: 1200px;
+  --color: #7877c6;
+
+  margin: -300px auto 0;
+  position: relative;
+  width: min(var(--page-max-width), 100%);
+  height: 600px;
+
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(
+    circle at center center,
+    black,
+    transparent 80%
+  );
+}
+
+.globe img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  -webkit-mask-image: radial-gradient(
+    circle at center bottom,
+    black,
+    transparent
+  );
+}
+
+.globe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom center,
+    var(--color),
+    transparent 70%
+  );
+  opacity: 0.4;
+  transform: translate(0px, 100px);
+}
+
+.globe::after {
+  content: "";
+  position: absolute;
+  background: rgb(0, 2, 18);
+  width: 200%;
+  left: -50%;
+  aspect-ratio: 1 / 0.7;
+  border-radius: 50%;
+  border-top: 1px solid rgba(120, 119, 198, 0.4);
+  top: 80%;
+}
+
+@media (prefers-reduced-motion) {
+  .logo::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .logo {
+    margin-top: 75px;
+  }
+
+  .globe {
+    margin: -370px auto 0;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
